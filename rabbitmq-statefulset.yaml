@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabbitmq
+spec:
+  serviceName: "rabbitmq"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3.8-management
+        env:
+        - name: RABBITMQ_USE_LONGNAME
+          value: "true"
+        - name: RABBITMQ_ERLANG_COOKIE
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-erlang-cookie
+              key: cookie
+        ports:
+        - containerPort: 5672
+          name: amqp
+        - containerPort: 15672
+          name: management
+        volumeMounts:
+        - name: config
+          mountPath: /etc/rabbitmq/rabbitmq.conf
+          subPath: rabbitmq.conf
+        - name: plugins
+          mountPath: /etc/rabbitmq/enabled_plugins
+          subPath: enabled_plugins
+        - name: definitions
+          mountPath: /etc/rabbitmq/definitions.json
+          subPath: definitions.json
+        - name: federation
+          mountPath: /etc/rabbitmq/federation.conf
+          subPath: rabbitmq.conf
+        - name: data
+          mountPath: /var/lib/rabbitmq
+      volumes:
+      - name: config
+        configMap:
+          name: rabbitmq-config
+          items:
+          - key: rabbitmq.conf
+            path: rabbitmq.conf
+      - name: plugins
+        configMap:
+          name: rabbitmq-config
+          items:
+          - key: enabled_plugins
+            path: enabled_plugins
+      - name: definitions
+        configMap:
+          name: rabbitmq-config
+          items:
+          - key: definitions.json
+            path: definitions.json
+      - name: federation
+        configMap:
+          name: rabbitmq-federation
+          items:
+          - key: rabbitmq.conf
+            path: rabbitmq.conf
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+
