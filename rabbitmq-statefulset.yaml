@@ -13,6 +13,7 @@ spec:
       labels:
         app: rabbitmq
     spec:
+      serviceAccountName: rabbitmq  # Use the created ServiceAccount
       containers:
       - name: rabbitmq
         image: rabbitmq:3.8-management
