@@ -6,7 +6,7 @@ metadata:
 data:
   rabbitmq.conf: |
     federation-upstream my-upstream {
-      uri: "amqp://user:password@rabbitmq.#OTHERNS#.svc.cluster.local";
+      uri: "amqp://guest:guest@rabbitmq.#OTHERNS#.svc.cluster.local";
     }
     federation-upstream-set my-upstream-set {
       upstreams: [my-upstream];
