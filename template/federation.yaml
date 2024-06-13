@@ -2,10 +2,11 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: rabbitmq-federation
+  namespace: #MYNS#
 data:
   rabbitmq.conf: |
     federation-upstream my-upstream {
-      uri: "amqp://user:password@rabbitmq.dc2.svc.cluster.local";
+      uri: "amqp://user:password@rabbitmq.#OTHERNS#.svc.cluster.local";
     }
     federation-upstream-set my-upstream-set {
       upstreams: [my-upstream];

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: rabbitmq
-  namespace: default
+  namespace: #MYNS#
 spec:
   serviceName: "rabbitmq"
   replicas: 3

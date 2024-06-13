@@ -1,5 +1,7 @@
 To access RabbitMQ deployed in Orbstack k8s, go to the
-[management interface](http://rabbitmq.default.svc.cluster.local:15672)
+[management interface for ns1](http://rabbitmq.ns1.svc.cluster.local:15672)
+and
+[management interface for ns2](http://rabbitmq.ns2.svc.cluster.local:15672)
 
 The credentials are
 ```

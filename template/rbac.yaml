@@ -2,24 +2,27 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: rabbitmq
+  namespace: #MYNS#
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
-  name: rabbitmq-cluster-role-binding
+  name: rabbitmq-role-binding
+  namespace: #MYNS#
 subjects:
 - kind: ServiceAccount
   name: rabbitmq
-  namespace: default
+  namespace: #MYNS#
 roleRef:
-  kind: ClusterRole
+  kind: Role
   name: rabbitmq-role
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
   name: rabbitmq-role
+  namespace: #MYNS#
 rules:
 - apiGroups: [""]
   resources: ["pods"]
