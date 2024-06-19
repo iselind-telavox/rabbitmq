@@ -10,3 +10,24 @@ Password: guest
 ```
 
 On the "Overview" tab you should see three nodes connected to form the cluster.
+
+# Federation
+Federation enables the mirroring of exchanges and queues between RabbitMQ
+brokers, thereby enabling data distribution and replication.
+
+I found someone who got this working
+[over here](https://kanapuli.github.io/posts/playing-with-rabbitmq-federation/).
+
+Exchange federation is a mechanism that allows a flow of messages through an exchange in one location (called the upstream or the source) be replicated to exchanges in other locations (downstreams).
+The downstreams are independent nodes or clusters that can span wide area networks (geo regions).
+The replication process is asynchronous and tolerates connectivity failures.
+
+Federated queues provides a way of balancing the load of a single logical queue across nodes or clusters.
+It does so by moving messages to other federation peers (nodes or clusters) when the local queue has no consumers.
+
+## Thoughts on federated exchanges and so on.
+
+As we need to add a policy for federation it might be a good idea to use a common prefix for federated stuff, something like `.federated.*`.
+
+## Testing
+Not sure how to test federation.
