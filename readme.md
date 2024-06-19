@@ -18,6 +18,10 @@ brokers, thereby enabling data distribution and replication.
 I found someone who got this working
 [over here](https://kanapuli.github.io/posts/playing-with-rabbitmq-federation/).
 
+CloudAMQP has written a post on high availability which you can
+[find here](https://www.cloudamqp.com/blog/part3-rabbitmq-best-practice-for-high-availability.html).
+It describes a lot of useful tips.
+
 Exchange federation is a mechanism that allows a flow of messages through an exchange in one location (called the upstream or the source) be replicated to exchanges in other locations (downstreams).
 The downstreams are independent nodes or clusters that can span wide area networks (geo regions).
 The replication process is asynchronous and tolerates connectivity failures.
