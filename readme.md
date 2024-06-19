@@ -21,6 +21,8 @@ I found someone who got this working
 CloudAMQP has written a post on high availability which you can
 [find here](https://www.cloudamqp.com/blog/part3-rabbitmq-best-practice-for-high-availability.html).
 It describes a lot of useful tips.
+Which links to another port on
+[the federation plugin](https://www.cloudamqp.com/blog/rabbitmq-federation.html) which contain some useful descriptions.
 
 Exchange federation is a mechanism that allows a flow of messages through an exchange in one location (called the upstream or the source) be replicated to exchanges in other locations (downstreams).
 The downstreams are independent nodes or clusters that can span wide area networks (geo regions).
@@ -34,4 +36,6 @@ It does so by moving messages to other federation peers (nodes or clusters) when
 As we need to add a policy for federation it might be a good idea to use a common prefix for federated stuff, something like `.federated.*`.
 
 ## Testing
-Not sure how to test federation.
+Federating queues is more of a load balancing act than a HA setup.
+
+Forcing a cluster to be at least three nodes will allow us to specify these three nodes in cluster formation.
